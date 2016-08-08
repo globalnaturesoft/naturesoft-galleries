@@ -4,6 +4,7 @@ class CreateNaturesoftImages < ActiveRecord::Migration[5.0]
       t.string :name
       t.text :description
       t.string :image
+      t.string :status, :default => "active"
       t.references :user, references: :naturesoft_users, index: true
       t.references :gallery, references: :naturesoft_galleries_galleries, index: true
 

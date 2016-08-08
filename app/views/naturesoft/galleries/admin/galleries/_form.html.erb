@@ -10,7 +10,7 @@
   </div>
 <% end %>
 
-<%= form_for([naturesoft, :admin, gallery], html: {class: "form-horizontal", id: "validate_checking"}) do |f| %>
+<%= form_for([naturesoft_galleries, :admin, gallery], html: {class: "form-horizontal", id: "validate_checking"}) do |f| %>
   
   <div class="form-group">
     <label class="col-lg-2 control-label" ><%= t(:name) %> <span class='text-danger'>*</span></label>
@@ -36,7 +36,7 @@
   <div class="form-group">
     <label class="col-lg-2 control-label"><%= t(:image_style) %></label>
     <div class="col-lg-5">
-      <select class="select" name="gallery[image_style]">
+      <select class="select2" name="gallery[image_style]">
         <option <%= "selected" if gallery.image_style == "fill" %> value="fill"><%= t(:fill) %></option>
         <option <%= "selected" if gallery.image_style == "fit" %> value="fit"><%= t(:fit) %></option>
       </select>
@@ -45,7 +45,7 @@
 
   <div class="text-right">
     <%= button_tag "#{t(:save)}<i class=\"icon-check position-right\"></i>".html_safe, class: "btn btn-primary"%>
-    <%= link_to "#{t(:cancel)}<i class=\"icon-cross3 position-right\"></i>".html_safe, naturesoft.admin_galleries_path, class: "btn btn-danger"%>
+    <%= link_to "#{t(:cancel)}<i class=\"icon-cross3 position-right\"></i>".html_safe, naturesoft_galleries.admin_galleries_path, class: "btn btn-danger"%>
   </div>
     
 <% end %>

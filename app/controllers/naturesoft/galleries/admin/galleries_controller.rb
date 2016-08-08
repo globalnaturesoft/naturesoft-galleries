@@ -2,12 +2,12 @@ module Naturesoft
   module Galleries
     module Admin
       class GalleriesController < Naturesoft::Admin::AdminController
-        before_action :set_gallery, only: [:show, :edit, :update, :destroy]
+        before_action :set_gallery, only: [:show, :edit, :update, :destroy, :enable, :disable]
         before_action :default_breadcrumb
         
         # add top breadcrumb
         def default_breadcrumb
-          add_breadcrumb "Galleries", naturesoft.admin_galleries_path
+          add_breadcrumb "Galleries", naturesoft_galleries.admin_galleries_path
         end
     
         # GET /galleries
@@ -17,19 +17,19 @@ module Naturesoft
     
         # GET /galleries/1
         def show
-          add_breadcrumb @galleries.name, naturesoft.new_admin_galleries_path
+          add_breadcrumb @galleries.name, naturesoft_galleries.new_admin_galleries_path
           add_breadcrumb "Show"
         end
     
         # GET /galleries/new
         def new
           @gallery = Gallery.new
-          add_breadcrumb "New Gallery", naturesoft.new_admin_gallery_path
+          add_breadcrumb "New Gallery", naturesoft_galleries.new_admin_gallery_path
         end
     
         # GET /galleries/1/edit
         def edit
-          add_breadcrumb @gallery.name, naturesoft.new_admin_gallery_path
+          add_breadcrumb @gallery.name, naturesoft_galleries.new_admin_gallery_path
           add_breadcrumb "Edit"
         end
     
@@ -58,6 +58,18 @@ module Naturesoft
         def destroy
           @gallery.destroy
           redirect_to admin_galleries_path, notice: 'Gallery was successfully destroyed.'
+        end
+        
+        # ENABLE /galleries/stutus
+        def enable
+          @gallery.enable
+          render text: "Status was sucessfully enabled"
+        end
+        
+        # DISABLE /galleries/stutus
+        def disable
+          @gallery.disable
+          render text: "Status was sucessfully disabled"
         end
     
         private

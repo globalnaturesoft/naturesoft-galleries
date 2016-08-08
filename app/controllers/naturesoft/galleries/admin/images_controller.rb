@@ -2,12 +2,12 @@ module Naturesoft
   module Galleries
     module Admin
       class ImagesController < Naturesoft::Admin::AdminController
-        before_action :set_image, only: [:show, :edit, :update, :destroy]
+        before_action :set_image, only: [:show, :edit, :update, :destroy, :enable, :disable]
         before_action :default_breadcrumb
         
         # add top breadcrumb
         def default_breadcrumb
-          add_breadcrumb "Images", naturesoft.admin_images_path
+          add_breadcrumb "Images", naturesoft_galleries.admin_images_path
         end
     
         # GET /images
@@ -17,19 +17,19 @@ module Naturesoft
     
         # GET /images/1
         def show
-          add_breadcrumb @images.name, naturesoft.new_admin_images_path
+          add_breadcrumb @images.name, naturesoft_galleries.new_admin_images_path
           add_breadcrumb "Show"
         end
     
         # GET /images/new
         def new
           @image = Image.new
-          add_breadcrumb "New Images", naturesoft.new_admin_image_path
+          add_breadcrumb "New Images", naturesoft_galleries.new_admin_image_path
         end
     
         # GET /images/1/edit
         def edit
-          add_breadcrumb @image.name, naturesoft.new_admin_image_path
+          add_breadcrumb @images.name, naturesoft_galleries.new_admin_image_path
           add_breadcrumb "Edit"
         end
     
@@ -58,6 +58,24 @@ module Naturesoft
         def destroy
           @image.destroy
           redirect_to admin_images_path, notice: 'Image was successfully destroyed.'
+        end
+        
+        # DELETE /galleries/1
+        def destroy
+          @image.destroy
+          redirect_to admin_galleries_path, notice: 'Gallery was successfully destroyed.'
+        end
+        
+        # ENABLE /galleries/stutus
+        def enable
+          @image.enable
+          render text: "Status was sucessfully enabled"
+        end
+        
+        # DISABLE /galleries/stutus
+        def disable
+          @image.disable
+          render text: "Status was sucessfully disabled"
         end
     
         private

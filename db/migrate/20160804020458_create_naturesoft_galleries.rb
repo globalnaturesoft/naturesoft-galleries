@@ -5,6 +5,7 @@ class CreateNaturesoftGalleries < ActiveRecord::Migration[5.0]
       t.integer :height
       t.integer :width
       t.string :image_style
+      t.string :status, :default => "active"
       t.references :user, references: :naturesoft_users, index: true
 
       t.timestamps

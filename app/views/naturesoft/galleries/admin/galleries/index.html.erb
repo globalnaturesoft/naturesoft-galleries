@@ -3,7 +3,7 @@
 <% title "Galleries" %>
 
 <div class="text-right">
-    <%= link_to ("#{t(:new_gallery)}" + '<i class="icon-plus22 position-right"></i>').html_safe, naturesoft.new_admin_gallery_path, class: 'btn btn-primary' %>
+    <%= link_to ("#{t(:new_gallery)}" + '<i class="icon-plus22 position-right"></i>').html_safe, naturesoft_galleries.new_admin_gallery_path, class: 'btn btn-primary' %>
 </div>
 <br />
 <form class="listing-form">
@@ -54,7 +54,7 @@
               <th>Image Style</th>
               <th>Creator</th>
               <th>Created At</th>
-              <th>Actions</th>
+              <th class="text-right">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -64,10 +64,7 @@
                 <%= gallery.name %>
               </td>
               <td>
-                <%= gallery.height %>
-              </td>
-              <td>
-                <%= gallery.width %>
+                <%= gallery.width %>x<%= gallery.height %>
               </td>
               <td>
                 <%= gallery.image_style %>
@@ -79,23 +76,30 @@
                 </div>
               </td>
               <td><%= gallery.created_at.strftime("%d/%m/%Y") %></td>
-              <td class="text-center">
-                <ul class="icons-list">
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      <i class="icon-menu9"></i>
-                    </a>
-
-                    <ul class="dropdown-menu dropdown-menu-right">
+              <td>
+                <%= display_status(gallery.status) %>
+              </td>
+              <td class="text-right">
+                <div class="btn-group">
+                  <%= link_to '<i class="icon-pencil"></i>'.html_safe, naturesoft_galleries.edit_admin_gallery_path(gallery), class: "btn bg-teal-400 btn-icon" %>
+                  <button type="button" class="btn bg-teal-400 dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                  <ul class="dropdown-menu dropdown-menu-right">
+                    <% if gallery.status == 'inactive' %>
                       <li>
-                        <%= link_to '<i class="glyphicon glyphicon-edit"></i>'.html_safe + t(:edit), naturesoft.edit_admin_gallery_path(gallery) %>
+                        <%= link_to "<i class=\"icon-unlocked2\"></i> Enable".html_safe, naturesoft_galleries.enable_admin_galleries_path(gallery), method: :put %>
                       </li>
+                    <% end %>
+                    <% if gallery.status == 'active' %>
                       <li>
-                        <%= link_to '<i class="glyphicon glyphicon-trash"></i>'.html_safe + t(:delete), naturesoft.admin_gallery_path(gallery), method: :delete, data: { confirm: 'Are you sure?' } , class: "backend_delete_item" %>
+                        <%= link_to "<i class=\"icon-lock2\"></i> Disable".html_safe, naturesoft_galleries.disable_admin_galleries_path(gallery), method: :put %>
                       </li>
-                    </ul>
-                  </li>
-                </ul>
+                    <% end %>
+                    <li class="divider"></li>
+                    <li>
+                      <%= link_to '<i class="glyphicon glyphicon-trash"></i>'.html_safe + t(:delete), naturesoft_galleries.admin_gallery_path(gallery), method: :delete, data: { confirm: 'Are you sure?' } , class: "backend_delete_item" %>
+                    </li>
+                  </ul>
+                </div>
               </td>
             </tr>
           <% end %>

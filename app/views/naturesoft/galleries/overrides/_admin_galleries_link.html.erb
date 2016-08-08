@@ -1,11 +1,11 @@
 <li>
   <a href="#"><i class="icon-images2"></i> <span>Gallery</span></a>
   <ul>
-      <li class="<%= active(naturesoft.admin_galleries_path) %>">
-        <%= link_to 'Galleries', naturesoft.admin_galleries_path %>
+      <li<% if["naturesoft/galleries/admin/galleries"].include?(params[:controller]) %>class="active"<% end %>">
+        <%= link_to 'Galleries', naturesoft_galleries.admin_galleries_path %>
       </li>
-      <li class="<%= active(naturesoft.admin_images_path) %>">
-        <%= link_to 'Images', naturesoft.admin_images_path %>
+      <li<% if["naturesoft/galleries/admin/images"].include?(params[:controller]) %>class="active"<% end %>>
+        <%= link_to 'Images', naturesoft_galleries.admin_images_path %>
       </li>
   </ul>
 </li>
