@@ -1,4 +1,4 @@
-class CreateNaturesoftImages < ActiveRecord::Migration[5.0]
+class CreateNaturesoftGalleriesImages < ActiveRecord::Migration[5.0]
   def change
     create_table :naturesoft_galleries_images do |t|
       t.string :name

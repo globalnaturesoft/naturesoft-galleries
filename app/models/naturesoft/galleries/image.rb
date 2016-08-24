@@ -2,6 +2,11 @@ module Naturesoft::Galleries
   class Image < ApplicationRecord
     belongs_to :user
     belongs_to :gallery
+    validates :image, presence: true
+		validates :image, allow_blank: true, format: {
+			with: %r{\.(gif|jpg|png)\Z}i,
+			message: 'must be a URL for GIF, JPG or PNG image.'
+		}
     mount_uploader :image, Naturesoft::Galleries::ImageUploader
     
     def self.sort_by

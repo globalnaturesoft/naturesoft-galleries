@@ -54,25 +54,6 @@ module Naturesoft
 				process :resize_to_fit => [60, 60]
 			end
       
-      # Thumb size from slideshow
-      version :thumb do
-				process :image_resize
-			end 
-			
-			# Thumb size from slideshow
-			def image_resize
-				if model.gallery.present? 
-					if model.gallery.image_style == "fill"
-						resize_to_fill(model.gallery.width, model.gallery.height)
-					elsif model.gallery.image_style == "fit"
-						resize_to_fit(model.gallery.width, model.gallery.height)
-					else
-						resize_to_fill(400, 300)
-					end
-				else
-					resize_to_fill(400, 300)
-				end
-			end
     end
   end
 end
