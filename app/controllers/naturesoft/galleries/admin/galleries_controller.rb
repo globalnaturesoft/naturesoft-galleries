@@ -72,7 +72,7 @@ module Naturesoft
           render text: "Status was sucessfully disabled"
         end
         
-        # DELETE /slides/delete?ids=1,2,3
+        # DELETE /galleries/delete?ids=1,2,3
         def delete
           @galleries = Gallery.where(id: params[:ids].split(","))
           @galleries.destroy_all
