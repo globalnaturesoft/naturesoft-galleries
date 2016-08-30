@@ -71,6 +71,13 @@ module Naturesoft
           @gallery.disable
           render text: "Status was sucessfully disabled"
         end
+        
+        # DELETE /slides/delete?ids=1,2,3
+        def delete
+          @galleries = Gallery.where(id: params[:ids].split(","))
+          @galleries.destroy_all
+          render text: '@galler(y/ies) was successfully destroyed.'
+        end
     
         private
           # Use callbacks to share common setup or constraints between actions.
