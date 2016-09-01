@@ -1,71 +1,89 @@
 <% if image.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(image.errors.count, "error") %> prohibited this slide from being saved:</h2>
-
-    <ul>
-    <% image.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-    </ul>
+  <div class="alert alert-warning alert-bordered">
+    <button type="button" class="close" data-dismiss="alert"><span>×</span><span class="sr-only">Close</span></button>
+    <div id="error_explanation">
+      <h2><%= pluralize(image.errors.count, "error") %> prohibited this slide from being saved:</h2>
+  
+      <ul>
+      <% image.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
   </div>
 <% end %>
 
-<%= form_for([naturesoft_galleries, :admin, image], html: {class: "form-horizontal", id: "validate_checking", multipart: true}) do |f| %>
-
-  <div class="form-group">
-    <label class="col-lg-2 control-label" ><%= t(:image) %> <span class='text-danger'>*</span></label>
-    <div class="media no-margin-top col-lg-10">
-      <div class="media-left">
-        <a href="#"><img src="<%= image.image.system %>" style="width: 60px; height: 60px; border-radius: 2px;" alt=""></a>
-      </div>
-
-      <div class="media-body">
-        <input type="file" name="image[image]" class="file-styled">
-        <span class="help-block">Accepted formats: gif, png, jpg.</span>
-      </div>
-    </div>
-  </div>
+<div class="panel panel-flat">
   
-  <div class="form-group">
-    <label class="col-lg-2 control-label" ><%= t(:name) %> <span class='text-danger'>*</span></label>
-    <div class="col-lg-10">
-      <%= f.text_field :name, class: "form-control required" %>
-    </div>
-  </div>
-  
-  <div class="form-group">
-    <label class="col-lg-2 control-label" ><%= t(:gallery_option) %> <span class='text-danger'>*</span></label>
-    <div class="col-lg-6">
-      <div class="input-group">
-        
-        
-        <% selected = options_for_select([image.gallery.name, image.gallery_id],image.gallery_id) if image.gallery.present? %>
-        <%= select_tag("gallery_id",
-          selected,
-          {
-            class: "select2-ajax",
-            include_blank: "none",
-            "data-url": select2_admin_galleries_path,
-          }
-        ) %>
-        <span class="input-group-btn">
-          <a class="btn btn-info" href="<%= naturesoft_galleries.new_admin_gallery_path %>"><i class="icon-plus2"></i></a>
-        </span>
-        
-      </div>
-    </div>
-  </div>
-      
-  <div class="form-group">
-    <label class="col-lg-2 control-label" ><%= t(:description) %> <span class='text-danger'>*</span></label>
-    <div class="col-lg-10">
-      <%= f.text_area :description, class: "form-control required", style: "min-width:100%;max-width:100%" %>
-    </div>
-  </div>
+  <div class="panel-body">
 
-  <div class="text-right">
-    <%= button_tag "#{t(:save)}<i class=\"icon-check position-right\"></i>".html_safe, class: "btn btn-primary"%>
-    <%= link_to "#{t(:cancel)}<i class=\"icon-cross3 position-right\"></i>".html_safe, naturesoft_galleries.admin_images_path, class: "btn btn-danger"%>
-  </div>
+    <%= form_for([naturesoft_galleries, :admin, image], html: {class: "form-horizontal", id: "validate_checking", multipart: true}) do |f| %>
     
-<% end %>
+      <div class="form-group">
+        <label class="col-lg-2 control-label" ><%= t(:image) %> <span class='text-danger'>*</span></label>
+        <div class="media no-margin-top col-lg-10">
+          <div class="media-left">
+            <a href="#">
+              <% if image.image.system.present? %>
+                <img src="<%= image.image.system %>" style="width: 70px; height: 70px; border-radius: 2px;" alt="">
+              <% else %>
+                <img src="/backend/assets/images/placeholder.jpg" style="width: 70px; height: 70px; border-radius: 2px;" alt="">
+              <% end %>
+            </a>
+          </div>
+    
+          <div class="media-body">
+            <input type="file" name="image[image]" class="file-styled">
+            <span class="help-block">Accepted formats: gif, png, jpg.</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="col-lg-2 control-label" ><%= t(:name) %> <span class='text-danger'>*</span></label>
+            <div class="col-lg-10">
+              <%= f.text_field :name, class: "form-control required" %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="col-lg-2 control-label" ><%= t(:gallery_option) %> <span class='text-danger'>*</span></label>
+            <div class="col-lg-6">
+              <div class="input-group">
+                
+                <% selected = options_for_select([image.gallery.name, image.gallery_id],image.gallery_id) if image.gallery.present? %>
+                <%= select_tag("gallery_id",
+                  selected,
+                  {
+                    class: "select2-ajax",
+                    include_blank: "none",
+                    "data-url": select2_admin_galleries_path,
+                  }
+                ) %>
+                <span class="input-group-btn">
+                  <a class="btn btn-info" href="<%= naturesoft_galleries.new_admin_gallery_path %>"><i class="icon-plus2"></i></a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+          
+      <div class="form-group">
+        <label class="col-lg-2 control-label" ><%= t(:description) %> </label>
+        <div class="col-lg-10">
+          <%= f.text_area :description, class: "form-control", style: "min-width:100%;max-width:100%" %>
+        </div>
+      </div>
+    
+      <div class="text-right">
+        <%= button_tag "#{t(:save)}<i class=\"icon-check position-right\"></i>".html_safe, class: "btn btn-primary"%>
+        <%= link_to "#{t(:cancel)}<i class=\"icon-cross3 position-right\"></i>".html_safe, naturesoft_galleries.admin_images_path, class: "btn btn-danger"%>
+      </div>
+        
+    <% end %>
+  </div>
+</div>
