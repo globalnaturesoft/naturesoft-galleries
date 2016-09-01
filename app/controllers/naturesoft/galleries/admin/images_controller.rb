@@ -17,7 +17,7 @@ module Naturesoft
     
         # GET /images/1
         def show
-          add_breadcrumb @images.name, naturesoft_galleries.new_admin_images_path
+          add_breadcrumb @image.name, naturesoft_galleries.new_admin_images_path
           add_breadcrumb "Show"
         end
     
@@ -29,7 +29,7 @@ module Naturesoft
     
         # GET /images/1/edit
         def edit
-          add_breadcrumb @images.name, naturesoft_galleries.new_admin_image_path
+          add_breadcrumb @image.name, naturesoft_galleries.new_admin_image_path
           add_breadcrumb "Edit"
         end
     
