@@ -1,6 +1,7 @@
 module Naturesoft::Galleries
   class Gallery < ApplicationRecord
     belongs_to :user
+    validates :name, :width, :height, presence: true
     
     def self.filter_image_style
       [

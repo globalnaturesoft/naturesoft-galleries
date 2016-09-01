@@ -4,7 +4,7 @@ module Naturesoft::Galleries
 		
     belongs_to :user
     belongs_to :gallery
-    validates :image, presence: true
+    validates :image, :name, presence: true
 		validates :image, allow_blank: true, format: {
 			with: %r{\.(gif|jpg|png)\Z}i,
 			message: 'must be a URL for GIF, JPG or PNG image.'
