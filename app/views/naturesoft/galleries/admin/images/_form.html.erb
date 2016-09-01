@@ -32,18 +32,34 @@
       <%= f.text_field :name, class: "form-control required" %>
     </div>
   </div>
+  
+  <div class="form-group">
+    <label class="col-lg-2 control-label" ><%= t(:gallery_option) %> <span class='text-danger'>*</span></label>
+    <div class="col-lg-6">
+      <div class="input-group">
+        
+        
+        <% selected = options_for_select([image.gallery.name, image.gallery_id],image.gallery_id) if image.gallery.present? %>
+        <%= select_tag("gallery_id",
+          selected,
+          {
+            class: "select2-ajax",
+            include_blank: "none",
+            "data-url": select2_admin_galleries_path,
+          }
+        ) %>
+        <span class="input-group-btn">
+          <a class="btn btn-info" href="<%= naturesoft_galleries.new_admin_gallery_path %>"><i class="icon-plus2"></i></a>
+        </span>
+        
+      </div>
+    </div>
+  </div>
       
   <div class="form-group">
     <label class="col-lg-2 control-label" ><%= t(:description) %> <span class='text-danger'>*</span></label>
     <div class="col-lg-10">
       <%= f.text_area :description, class: "form-control required", style: "min-width:100%;max-width:100%" %>
-    </div>
-  </div>
-  
-  <div class="form-group">
-    <label class="col-lg-2 control-label" ><%= t(:gallery_option) %> <span class='text-danger'>*</span></label>
-    <div class="col-lg-6">
-      <%= f.collection_select(:gallery_id, Naturesoft::Galleries::Gallery.all, :id, :name, {:prompt=> "Choose..."}, {class: "select2"}) %>
     </div>
   </div>
 

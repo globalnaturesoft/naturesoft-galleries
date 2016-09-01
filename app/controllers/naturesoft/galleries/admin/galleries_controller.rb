@@ -76,9 +76,14 @@ module Naturesoft
         def delete
           @galleries = Gallery.where(id: params[:ids].split(","))
           @galleries.destroy_all
-          render text: '@galler(y/ies) was successfully destroyed.'
+          render text: 'Galler(y/ies) was successfully destroyed.'
         end
-    
+        
+        # GET /galleries/select2
+        def select2
+          render json: Gallery.select2(params)
+        end
+        
         private
           # Use callbacks to share common setup or constraints between actions.
           def set_gallery

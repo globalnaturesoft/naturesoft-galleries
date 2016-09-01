@@ -12,6 +12,7 @@ Naturesoft::Galleries::Engine.routes.draw do
         put ':id/enable' => 'galleries#enable', :as => 'enable'
         put ':id/disable' => 'galleries#disable', :as => 'disable'
         delete 'delete'
+        get "select2"
       end
     end
   end
