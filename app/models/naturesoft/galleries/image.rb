@@ -1,5 +1,7 @@
 module Naturesoft::Galleries
   class Image < ApplicationRecord
+		include Naturesoft::CustomOrder
+		
     belongs_to :user
     belongs_to :gallery
     validates :image, presence: true
@@ -11,6 +13,7 @@ module Naturesoft::Galleries
     
     def self.sort_by
       [
+        ["Custom order","naturesoft_galleries_images.custom_order"],
         ["Name","naturesoft_galleries_images.name"],
         ["Created At","naturesoft_galleries_images.created_at"]
       ]
