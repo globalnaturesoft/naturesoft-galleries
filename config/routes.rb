@@ -4,6 +4,7 @@ Naturesoft::Galleries::Engine.routes.draw do
       collection do
         put ':id/enable' => 'images#enable', :as => 'enable'
         put ':id/disable' => 'images#disable', :as => 'disable'
+        delete 'delete'
       end
     end
     resources :galleries do

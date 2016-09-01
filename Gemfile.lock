@@ -3,9 +3,12 @@ PATH
   specs:
     naturesoft_core (0.1.0)
       autoprefixer-rails (~> 5.1.5)
-      breadcrumbs_on_rails
+      breadcrumbs_on_rails (~> 2.3.1)
+      carrierwave
       devise (~> 4.2.0)
+      mini_magick
       rails (~> 5.0.0)
+      sixarm_ruby_unaccent (>= 1.1.1, < 2)
       will_paginate
       will_paginate-bootstrap
 
@@ -64,6 +67,12 @@ GEM
     bcrypt (3.1.11)
     breadcrumbs_on_rails (2.3.1)
     builder (3.2.2)
+    carrierwave (0.11.2)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
+      mimemagic (>= 0.3.0)
     colorize (0.8.1)
     concurrent-ruby (1.0.2)
     deface (1.0.2)
@@ -91,6 +100,8 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
+    mimemagic (0.3.2)
+    mini_magick (4.5.1)
     mini_portile2 (2.1.0)
     minitest (5.9.0)
     nio4r (1.2.1)
@@ -127,8 +138,9 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (11.2.2)
-    responders (2.2.0)
+    responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
+    sixarm_ruby_unaccent (1.1.1)
     sprockets (3.7.0)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)

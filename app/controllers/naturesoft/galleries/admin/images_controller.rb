@@ -59,23 +59,24 @@ module Naturesoft
           @image.destroy
           redirect_to admin_images_path, notice: 'Image was successfully destroyed.'
         end
-        
-        # DELETE /galleries/1
-        def destroy
-          @image.destroy
-          redirect_to admin_galleries_path, notice: 'Gallery was successfully destroyed.'
-        end
-        
-        # ENABLE /galleries/stutus
+
+        # ENABLE /images/stutus
         def enable
           @image.enable
           render text: "Status was sucessfully enabled"
         end
         
-        # DISABLE /galleries/stutus
+        # DISABLE /images/stutus
         def disable
           @image.disable
           render text: "Status was sucessfully disabled"
+        end
+        
+        # DELETE /images/delete?ids=1,2,3
+        def delete
+          @images = Image.where(id: params[:ids].split(","))
+          @images.destroy_all
+          render text: 'Image(s) was successfully destroyed.'
         end
     
         private

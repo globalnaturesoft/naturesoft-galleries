@@ -42,25 +42,45 @@
             </div>
         </div>
     </div>
-    
+    <div class="btn-group list_actions mb-10 hide">
+        <button type="button" class="btn btn-xs btn-info dropdown-toggle" data-toggle="dropdown">
+            Actions <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">											
+            <li>
+                <a href="" data-href="<%= naturesoft_galleries.delete_admin_images_path %>" data-confirm="Are you sure!" data-method="DELETE">
+                    <i class="icon-enter"></i> Delete
+                </a>
+            </li>            
+        </ul>
+    </div>
     <!-- Basic datatable -->
     <div class="panel panel-flat">        
         <div class="table-container">
             <table class="table table-striped">
                 <thead>
                     <tr class="bg-teal-800">
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Creator</th>
-                        <th>Created At</th>
-                        <th>Status</th>
-                        <th class="text-right">Actions</th>
+                        <th width="1%" class="check_all_list">
+                            <input type="checkbox" class="styled">
+                        </th>
+                        <th><%= t(:image) %></th>
+                        <th><%= t(:name) %></th>
+                        <th><%= t(:description) %></th>
+                        <th class="text-center"><%= t(:creator) %></th>
+                        <th><%= t(:created_at) %></th>
+                        <th><%= t(:status) %></th>
+                        <th class="text-right"><%= t(:actions) %></th>
                     </tr>
                 </thead>
                 <tbody>
                     <% @images.each do |image| %>
                         <tr>
+                            <td>
+                                <input type="checkbox" class="node styled"
+                                    name="ids[]"
+                                    value="<%= image.id %>"
+                                />
+                            </td>
                             <td>
                                 <%= link_to image_tag(image.image.system, size: "70x70", class: "img-rounded img-preview"), "" %>
                             </td>
@@ -70,11 +90,8 @@
                             <td>
                                 <%= image.description %>
                             </td>
-                            <td>
-                                <div class="media-left align_center">
-                                    <img src="#" class="img-circle" alt="">
-                                    <br />Creator
-                                </div>
+                            <td class="text-center">
+                                <%= user_box(image.user) %>
                             </td>
                             <td><%= image.created_at.strftime("%d/%m/%Y") %></td>
                             <td><%= display_status(image.status) %></td>
