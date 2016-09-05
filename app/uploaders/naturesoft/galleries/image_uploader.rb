@@ -54,13 +54,13 @@ module Naturesoft
 				process :resize_to_fit => [60, 60]
 			end
 			
-			# Thumb size from slideshow
+			# Thumb size from gallery
 			version :thumb do
-				process :slide_resize
+				process :image_resize
 			end 
 			
-			# Thumb size from slideshow
-			def slide_resize
+			# Thumb size from gallery
+			def image_resize
 				if model.gallery.present? 
 					if model.gallery.image_style == "fill"
 						resize_to_fill(model.gallery.width, model.gallery.height)
