@@ -2,6 +2,10 @@ module Naturesoft::Galleries
   class Gallery < ApplicationRecord
     belongs_to :user
     validates :name, :width, :height, presence: true
+    has_many :images, dependent: :destroy, :inverse_of => :gallery
+    accepts_nested_attributes_for :images,
+			:reject_if => lambda { |a| a[:image].blank? && a[:id].blank? },
+			:allow_destroy => true
     
     def self.filter_image_style
       [
@@ -54,6 +58,14 @@ module Naturesoft::Galleries
     
     def disable
 			update_columns(status: "inactive")
+		end
+    
+    # get newest default image
+    def main_image
+			return Image.new if images.empty?
+			
+			img = images.where(is_main: true).last
+			return img.nil? ? images.last : img
 		end
     
     # data for select2 ajax

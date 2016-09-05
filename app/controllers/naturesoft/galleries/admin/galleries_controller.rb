@@ -92,7 +92,12 @@ module Naturesoft
     
           # Only allow a trusted parameter "white list" through.
           def gallery_params
-            params.fetch(:gallery, {}).permit(:name, :height, :width, :image_style)
+            params.fetch(:gallery, {}).permit(:name,
+              :height,
+              :width,
+              :image_style,
+              images_attributes: [:id, :is_main, :user_id, :image, :name, :_destroy]
+            )
           end
       end
     end

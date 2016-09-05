@@ -17,49 +17,76 @@
   
   <div class="panel-body">
 
-    <%= form_for([naturesoft_galleries, :admin, gallery], html: {class: "form-horizontal", id: "validate_checking"}) do |f| %>
+    <%= form_for([naturesoft_galleries, :admin, gallery], html: {class: "form-horizontal validate", multipart: true}) do |f| %>
       
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="col-lg-2 control-label" ><%= t(:name) %> <span class='text-danger'>*</span></label>
-            <div class="col-lg-10">
-              <%= f.text_field :name, class: "form-control required" %>
+      <div class="tabbable">
+        
+        <ul class="nav nav-tabs nav-tabs-bottom">
+          <li class="active"><a href="#right-icon-tab1" data-toggle="tab" aria-expanded="true"><i class=" icon-spinner4 position-left"></i> Information</a></li>
+          <li class=""><a href="#right-icon-tab2" data-toggle="tab" aria-expanded="false"><i class="icon-attachment position-left"></i> Images</a></li>
+        </ul>
+        
+        <div class="tab-content">
+          <div class="tab-pane active" id="right-icon-tab1">
+            
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="col-lg-2 control-label" ><%= t(:name) %> <span class='text-danger'>*</span></label>
+                  <div class="col-lg-10">
+                    <%= f.text_field :name, class: "form-control required" %>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="col-lg-2 control-label"><%= t(:image_style) %></label>
+                  <div class="col-lg-5">
+                    <select class="select2" name="gallery[image_style]">
+                      <option <%= "selected" if gallery.image_style == "fill" %> value="fill"><%= t(:fill) %></option>
+                      <option <%= "selected" if gallery.image_style == "fit" %> value="fit"><%= t(:fit) %></option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="col-lg-2 control-label" ><%= t(:width) %> <span class='text-danger'>*</span></label>
+                  <div class="col-lg-10">
+                    <%= f.text_field :width, class: "form-control required" %>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="col-lg-2 control-label" ><%= t(:height) %> <span class='text-danger'>*</span></label>
+                  <div class="col-lg-10">
+                    <%= f.text_field :height, class: "form-control required" %>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="col-lg-2 control-label"><%= t(:image_style) %></label>
-            <div class="col-lg-5">
-              <select class="select2" name="gallery[image_style]">
-                <option <%= "selected" if gallery.image_style == "fill" %> value="fill"><%= t(:fill) %></option>
-                <option <%= "selected" if gallery.image_style == "fit" %> value="fit"><%= t(:fit) %></option>
-              </select>
+          <div class="tab-pane addable-form" data-sample="image-form" id="right-icon-tab2">
+            <div class="addable-container">
+              <% gallery.images.each_with_index do |image,index| %>
+                <%= render "image_form", item: image, index: index %>
+              <% end %>
+            </div>
+            <div class="row">
+              <div class="col-md-2">
+                <div class="text-left">
+                  <a href="#add" class="btn btn-info addable-add">Add Image <i class="icon-plus2 position-center"></i></a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="col-lg-2 control-label" ><%= t(:width) %> <span class='text-danger'>*</span></label>
-            <div class="col-lg-10">
-              <%= f.text_field :width, class: "form-control required" %>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="col-lg-2 control-label" ><%= t(:height) %> <span class='text-danger'>*</span></label>
-            <div class="col-lg-10">
-              <%= f.text_field :height, class: "form-control required" %>
-            </div>
-          </div>
-        </div>
-      </div>
-      
+            
       <div class="text-right">
         <%= button_tag "#{t(:save)}<i class=\"icon-check position-right\"></i>".html_safe, class: "btn btn-primary"%>
         <%= link_to "#{t(:cancel)}<i class=\"icon-cross3 position-right\"></i>".html_safe, naturesoft_galleries.admin_galleries_path, class: "btn btn-danger"%>
@@ -68,3 +95,9 @@
     <% end %>
   </div>
 </div>
+
+<!-- thumbnail size sample form -->
+<div class="image-form hide">
+  <%= render 'image_form', item: Naturesoft::Galleries::Image.new, index: "<<index>>" %>
+</div>
+<!--/thumbnail size sample form -->

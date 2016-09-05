@@ -1,0 +1,51 @@
+            <%= hidden_field_tag "gallery[images_attributes]["+index.to_s+"][id]", item.id %>
+            <%= hidden_field_tag "gallery[images_attributes]["+index.to_s+"][user_id]", current_user.id %>
+            <div class="row addable-row" data-index="<%= index %>">
+              <div class="col-md-5">
+                <div class="form-group">
+                  <label class="col-md-3 control-label" ><%= t(:image) %> <span class='text-danger'>*</span></label>
+                  <div class="media no-margin-top col-md-9">
+                    <div class="media-left">
+                      <a href="#">
+                          <img src="<%= image_src(item.image.system) %>" style="width: 50px; height: auto; border-radius: 2px;" alt="">
+                      </a>
+                    </div>
+              
+                    <div class="media-body">
+                      <input type="file" name="gallery[images_attributes][<%= index %>][image]" class="">
+                      <span class="help-block">Accepted formats: gif, png, jpg.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="col-md-2 control-label" ><%= t(:name) %> </label>
+                  <div class="col-md-10">
+                    <input value="<%= item.name %>" class="form-control" name="gallery[images_attributes][<%= index %>][name]" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-1 hide">
+                <div class="form-group">
+                  <div><%= t(:remove) %> </div>
+                  <div class="">
+                    <input type="checkbox" value="true" class="checkbox delete" name="gallery[images_attributes][<%= index %>][_destroy]" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="form-group">                  
+                  <div class="">
+                    <input type="hidden" value="false" name="gallery[images_attributes][<%= index %>][is_main]" />
+                    <input check-group="gallery_image_main" type="radio" <%= "checked=checked" if item.is_main %> value="true" class="checkbox" name="gallery[images_attributes][<%= index %>][is_main]" />
+                  </div>
+                  <div><%= t(:default) %></div>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <a href="#add" class="btn btn-danger addable-nested-remove"><i class="icon-cross2"></i></a>
+              </div>
+              <hr style="clear: both" />
+            </div>
+            
