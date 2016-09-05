@@ -54,7 +54,7 @@
             <div class="col-lg-6">
               <div class="input-group">
                 
-                <% selected = options_for_select([[image.gallery.name, image.gallery_id]],image.gallery.name) if image.gallery.present? %>
+                <% selected = options_for_select([[image.gallery.name, image.gallery_id]],image.gallery_id) if image.gallery.present? %>
                 <%= select_tag("image[gallery_id]",
                   selected,
                   {
