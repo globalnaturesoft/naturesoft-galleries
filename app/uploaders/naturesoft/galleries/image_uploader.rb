@@ -60,7 +60,7 @@ module Naturesoft
 			end 
 			
 			# Thumb size from slideshow
-			def slide_resize
+			def image_resize
 				# gallery = Gallery.find(model.gallery_id)
 				gallery = model.gallery
 				if gallery.present?
