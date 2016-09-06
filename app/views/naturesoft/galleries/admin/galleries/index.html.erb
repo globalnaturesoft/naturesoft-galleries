@@ -62,9 +62,9 @@
               <th width="1%" class="check_all_list">
                 <input type="checkbox" class="styled">
               </th>
+              <th><%= t(:image) %></th>
               <th><%= t(:name) %></th>
               <th><%= t(:size) %></th>
-              <th><%= t(:image_style) %></th>
               <th class="text-center"><%= t(:creator) %></th>
               <th><%= t(:created_at) %></th>
               <th><%= t(:status) %></th>
@@ -81,13 +81,13 @@
                 />
               </td>
               <td>
+                <%= image_tag(image_src(gallery.main_image.image.system), size: "60x60", class: "img-rounded img-preview") %>
+              </td>
+              <td>
                 <%= gallery.name %>
               </td>
               <td>
-                <%= gallery.width %>x<%= gallery.height %>
-              </td>
-              <td>
-                <%= gallery.image_style %>
+                <span style="text-transform: uppercase"><%= gallery.image_style %> </span>(<%= gallery.width %>x<%= gallery.height %>)
               </td>
               <td class="text-center">
                 <%= user_box(gallery.user) %>
