@@ -61,17 +61,19 @@ module Naturesoft
 			
 			# Thumb size from slideshow
 			def slide_resize
-				if model.gallery.present? 
-					if model.gallery.image_style == "fill"
-						resize_to_fill(model.gallery.width, model.gallery.height)
-					elsif model.gallery.image_style == "fit"
-						resize_to_fit(model.gallery.width, model.gallery.height)
-					else
-						resize_to_fill(400, 300)
+				# gallery = Gallery.find(model.gallery_id)
+				gallery = model.gallery
+				if gallery.present?
+					if gallery.image_style == "fill"
+						resize_to_fill(gallery.width, gallery.height)
+						return
+					elsif gallery.image_style == "fit"
+						resize_to_fit(gallery.width, gallery.height)
+						return
 					end
-				else
-					resize_to_fill(400, 300)
 				end
+				
+				resize_to_fit(300, 300)
 			end
       
     end

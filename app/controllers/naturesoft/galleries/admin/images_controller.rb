@@ -35,7 +35,7 @@ module Naturesoft
     
         # POST /images
         def create
-          @image = Image.new(image_params)
+          @image = Image.new(image_params)          
           @image.user = current_user
     
           if @image.save

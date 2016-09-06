@@ -4,12 +4,20 @@ module Naturesoft::Galleries
 		
     belongs_to :user
     belongs_to :gallery
+    
     validates :image, :name, presence: true
 		validates :image, allow_blank: true, format: {
 			with: %r{\.(gif|jpg|png)\Z}i,
 			message: 'must be a URL for GIF, JPG or PNG image.'
 		}
+		
     mount_uploader :image, Naturesoft::Galleries::ImageUploader
+    
+    after_save :recreate_thumbs
+    
+    def recreate_thumbs
+			self.image.recreate_versions!
+		end
     
     def self.sort_by
       [

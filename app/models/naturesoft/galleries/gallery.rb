@@ -6,6 +6,14 @@ module Naturesoft::Galleries
     accepts_nested_attributes_for :images,
 			:reject_if => lambda { |a| a[:image].blank? && a[:id].blank? },
 			:allow_destroy => true
+		
+		after_save :recreate_thumbs
+    
+    def recreate_thumbs
+			images.each do |i|
+				i.recreate_thumbs
+			end
+		end
     
     def self.filter_image_style
       [
