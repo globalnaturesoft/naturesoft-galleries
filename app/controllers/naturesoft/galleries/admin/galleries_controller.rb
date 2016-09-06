@@ -17,20 +17,17 @@ module Naturesoft
     
         # GET /galleries/1
         def show
-          add_breadcrumb @galleries.name, naturesoft_galleries.new_admin_galleries_path
-          add_breadcrumb "Show"
         end
     
         # GET /galleries/new
         def new
           @gallery = Gallery.new
-          add_breadcrumb "New Gallery", naturesoft_galleries.new_admin_gallery_path
+          add_breadcrumb "New Gallery", nil,  class: "active"
         end
     
         # GET /galleries/1/edit
         def edit
-          add_breadcrumb @gallery.name, naturesoft_galleries.new_admin_gallery_path
-          add_breadcrumb "Edit"
+          add_breadcrumb "Edit Gallery", nil,  class: "active"
         end
     
         # POST /galleries
@@ -39,7 +36,7 @@ module Naturesoft
           @gallery.user = current_user
     
           if @gallery.save
-            redirect_to admin_galleries_path, notice: 'Gallery was successfully created.'
+            redirect_to naturesoft_galleries.edit_admin_gallery_path(@gallery.id), notice: 'Gallery was successfully created.'
           else
             render :new
           end
@@ -48,7 +45,7 @@ module Naturesoft
         # PATCH/PUT /galleries/1
         def update
           if @gallery.update(gallery_params)
-            redirect_to admin_galleries_path, notice: 'Gallery was successfully updated.'
+            redirect_to naturesoft_galleries.edit_admin_gallery_path(@gallery.id), notice: 'Gallery was successfully updated.'
           else
             render :edit
           end
