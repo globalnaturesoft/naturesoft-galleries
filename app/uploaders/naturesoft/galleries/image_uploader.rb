@@ -54,9 +54,9 @@ module Naturesoft
 				process :resize_to_fit => [60, 60]
 			end
 			
-			# Thumb size from slideshow
+			# Thumb size from gallery
 			version :thumb do
-				process :slide_resize
+				process :image_resize
 			end 
 			
 			# Thumb size from slideshow
