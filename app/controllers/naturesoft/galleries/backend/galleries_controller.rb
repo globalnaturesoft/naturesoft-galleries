@@ -1,13 +1,13 @@
 module Naturesoft
   module Galleries
-    module Admin
-      class GalleriesController < Naturesoft::Admin::AdminController
+    module Backend
+      class GalleriesController < Naturesoft::Backend::BackendController
         before_action :set_gallery, only: [:show, :edit, :update, :destroy, :enable, :disable]
         before_action :default_breadcrumb
         
         # add top breadcrumb
         def default_breadcrumb
-          add_breadcrumb "Galleries", naturesoft_galleries.admin_galleries_path
+          add_breadcrumb "Galleries", naturesoft_galleries.backend_galleries_path
         end
     
         # GET /galleries
@@ -36,7 +36,7 @@ module Naturesoft
           @gallery.user = current_user
     
           if @gallery.save
-            redirect_to naturesoft_galleries.edit_admin_gallery_path(@gallery.id), notice: 'Gallery was successfully created.'
+            redirect_to naturesoft_galleries.edit_backend_gallery_path(@gallery.id), notice: 'Gallery was successfully created.'
           else
             render :new
           end
@@ -45,7 +45,7 @@ module Naturesoft
         # PATCH/PUT /galleries/1
         def update
           if @gallery.update(gallery_params)
-            redirect_to naturesoft_galleries.edit_admin_gallery_path(@gallery.id), notice: 'Gallery was successfully updated.'
+            redirect_to naturesoft_galleries.edit_backend_gallery_path(@gallery.id), notice: 'Gallery was successfully updated.'
           else
             render :edit
           end
@@ -54,7 +54,7 @@ module Naturesoft
         # DELETE /galleries/1
         def destroy
           @gallery.destroy
-          redirect_to admin_galleries_path, notice: 'Gallery was successfully destroyed.'
+          redirect_to backend_galleries_path, notice: 'Gallery was successfully destroyed.'
         end
         
         # ENABLE /galleries/stutus

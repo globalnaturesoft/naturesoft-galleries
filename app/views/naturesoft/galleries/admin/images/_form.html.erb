@@ -17,7 +17,7 @@
   
   <div class="panel-body">
 
-    <%= form_for([naturesoft_galleries, :admin, image], html: {class: "form-horizontal", id: "validate_checking", multipart: true}) do |f| %>
+    <%= form_for([naturesoft_galleries, :backend, image], html: {class: "form-horizontal", id: "validate_checking", multipart: true}) do |f| %>
     
       <div class="form-group">
         <label class="col-lg-2 control-label" ><%= t(:image) %> <span class='text-danger'>*</span></label>
@@ -60,11 +60,11 @@
                   {
                     class: "select2-ajax",
                     include_blank: "none",
-                    "data-url": select2_admin_galleries_path,
+                    "data-url": select2_backend_galleries_path,
                   }
                 ) %>
                 <span class="input-group-btn">
-                  <a class="btn btn-info" href="<%= naturesoft_galleries.new_admin_gallery_path %>"><i class="icon-plus2"></i></a>
+                  <a class="btn btn-info" href="<%= naturesoft_galleries.new_backend_gallery_path %>"><i class="icon-plus2"></i></a>
                 </span>
               </div>
             </div>
@@ -81,7 +81,7 @@
     
       <div class="text-right">
         <%= button_tag "#{t(:save)}<i class=\"icon-check position-right\"></i>".html_safe, class: "btn btn-primary"%>
-        <%= link_to "#{t(:cancel)}<i class=\"icon-cross3 position-right\"></i>".html_safe, naturesoft_galleries.admin_images_path, class: "btn btn-danger"%>
+        <%= link_to "#{t(:cancel)}<i class=\"icon-cross3 position-right\"></i>".html_safe, naturesoft_galleries.backend_images_path, class: "btn btn-danger"%>
       </div>
         
     <% end %>

@@ -3,11 +3,11 @@
 <% title "Images" %>
 
 <div class="page_actions">
-    <%= link_to ("#{t(:new_image)}" + '<i class="icon-plus22 position-right"></i>').html_safe, naturesoft_galleries.new_admin_image_path, class: 'btn btn-primary' %>
+    <%= link_to ("#{t(:new_image)}" + '<i class="icon-plus22 position-right"></i>').html_safe, naturesoft_galleries.new_backend_image_path, class: 'btn btn-primary' %>
 </div>
 <br />
 
-<form class="listing-form sortable" sort-url="<%= naturesoft.admin_custom_sort_path(class: "Naturesoft::Galleries::Image") %>">
+<form class="listing-form sortable" sort-url="<%= naturesoft.backend_custom_sort_path(class: "Naturesoft::Galleries::Image") %>">
     
     <div class="panel panel-flat border-top-primary">
         <div class="panel-body filter-box">
@@ -48,7 +48,7 @@
         </button>
         <ul class="dropdown-menu">											
             <li>
-                <a href="" data-href="<%= naturesoft_galleries.delete_admin_images_path %>" data-confirm="Are you sure!" data-method="DELETE">
+                <a href="" data-href="<%= naturesoft_galleries.delete_backend_images_path %>" data-confirm="Are you sure!" data-method="DELETE">
                     <i class="icon-enter"></i> Delete
                 </a>
             </li>            
@@ -101,22 +101,22 @@
                             <td><%= display_status(image.status) %></td>
                             <td class="text-right">
                                 <div class="btn-group">
-                                    <%= link_to '<i class="icon-pencil"></i>'.html_safe, naturesoft_galleries.edit_admin_image_path(image), class: "btn bg-teal-400 btn-icon" %>
+                                    <%= link_to '<i class="icon-pencil"></i>'.html_safe, naturesoft_galleries.edit_backend_image_path(image), class: "btn bg-teal-400 btn-icon" %>
                                     <button type="button" class="btn bg-teal-400 dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
                                     <ul class="dropdown-menu dropdown-menu-right">
                                         <% if image.status == 'inactive' %>
                                             <li>
-                                              <%= link_to "<i class=\"icon-unlocked2\"></i> Enable".html_safe, naturesoft_galleries.enable_admin_images_path(image), method: :put %>
+                                              <%= link_to "<i class=\"icon-unlocked2\"></i> Enable".html_safe, naturesoft_galleries.enable_backend_images_path(image), method: :put %>
                                             </li>
                                         <% end %>
                                         <% if image.status == 'active' %>
                                             <li>
-                                              <%= link_to "<i class=\"icon-lock2\"></i> Disable".html_safe, naturesoft_galleries.disable_admin_images_path(image), method: :put %>
+                                              <%= link_to "<i class=\"icon-lock2\"></i> Disable".html_safe, naturesoft_galleries.disable_backend_images_path(image), method: :put %>
                                             </li>
                                         <% end %>
                                         <li class="divider"></li>
                                         <li>
-                                            <%= link_to '<i class="glyphicon glyphicon-trash"></i>'.html_safe + t(:delete), naturesoft_galleries.admin_image_path(image), method: :delete, data: { confirm: 'Are you sure?' } , class: "backend_delete_item" %>
+                                            <%= link_to '<i class="glyphicon glyphicon-trash"></i>'.html_safe + t(:delete), naturesoft_galleries.backend_image_path(image), method: :delete, data: { confirm: 'Are you sure?' } , class: "backend_delete_item" %>
                                         </li>
                                     </ul>
                                 </div>
