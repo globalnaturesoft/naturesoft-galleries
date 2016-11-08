@@ -6,7 +6,7 @@
     <%= link_to ("#{t(:new_gallery)}" + '<i class="icon-plus22 position-right"></i>').html_safe, naturesoft_galleries.new_backend_gallery_path, class: 'btn btn-primary' %>
 </div>
 <br />
-<form class="listing-form">
+<form class="listing-form sortable" sort-url="<%= naturesoft.backend_custom_sort_path(class: "Naturesoft::Galleries::Gallery") %>">
   
   <div class="panel panel-flat border-top-primary">
       <div class="panel-body filter-box">                
@@ -20,13 +20,13 @@
               <div class="col-md-3">
                   <div class="form-group">
                       <label><%= t(:sort_by) %></label>
-                      <%= select_tag(:sort_by, options_for_select(Naturesoft::Galleries::Gallery.sort_by, :selected => params[:sort_by]), class: "select2") %>
+                      <%= select_tag(:sort_by, options_for_select(Naturesoft::Galleries::Gallery.sort_by, :selected => params[:sort_by]), class: "select2", "sort-cond": "naturesoft_galleries_galleries.custom_order") %>
                   </div>
               </div>
               <div class="col-md-3">
                   <div class="form-group">
                       <label><%= t(:sort_order) %></label>
-                      <%= select_tag(:sort_orders, options_for_select(Naturesoft::Galleries::Gallery.sort_orders, :selected => params[:sort_orders]), class: "select2") %>
+                      <%= select_tag(:sort_orders, options_for_select(Naturesoft::Galleries::Gallery.sort_orders, :selected => params[:sort_orders]), class: "select2", "sort-cond": "asc") %>
                   </div>
               </div>
               <div class="col-md-3">
@@ -74,14 +74,18 @@
         <tbody>
           <% @galleries.each do |gallery| %>
             <tr>
-              <td>
+              <td class="text-nowrap">
                 <input type="checkbox" class="node styled"
                   name="ids[]"
                   value="<%= gallery.id %>"
                 />
+                <input type="hidden"
+                    name="custom_order"
+                    value="<%= gallery.custom_order %>"
+                />
               </td>
               <td>
-                <%= image_tag(image_src(gallery.main_image.image.system), size: "60x60", class: "img-rounded img-preview") %>
+                <a href="<%= naturesoft_galleries.edit_backend_gallery_path(gallery) %>"><%= image_tag(image_src(gallery.main_image.image.system), size: "60x60", class: "img-rounded img-preview") %></a>
               </td>
               <td>
                 <%= gallery.name %>

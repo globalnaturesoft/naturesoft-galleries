@@ -1,5 +1,6 @@
 module Naturesoft::Galleries
   class Gallery < ApplicationRecord
+		include Naturesoft::CustomOrder
     belongs_to :user
     validates :name, :width, :height, presence: true
     has_many :images, dependent: :destroy, :inverse_of => :gallery
@@ -23,6 +24,7 @@ module Naturesoft::Galleries
     end
     def self.sort_by
       [
+        ["Custom order","naturesoft_galleries_galleries.custom_order"],
         ["Name","naturesoft_galleries_galleries.name"],
         ["Height","naturesoft_galleries_galleries.height"],
         ["Width","naturesoft_galleries_galleries.width"],

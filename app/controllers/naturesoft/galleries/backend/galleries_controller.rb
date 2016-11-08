@@ -93,6 +93,7 @@ module Naturesoft
               :height,
               :width,
               :image_style,
+              :description,
               images_attributes: [:id, :is_main, :user_id, :image, :name, :_destroy]
             )
           end

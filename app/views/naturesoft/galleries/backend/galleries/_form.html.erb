@@ -69,6 +69,17 @@
                 </div>
               </div>
             </div>
+              
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="col-lg-2 control-label" ><%= t(:description) %> </label>
+                  <div class="col-lg-10">
+                    <%= f.text_area :description, class: "form-control", style: "min-width:100%;max-width:100%" %>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="tab-pane addable-form" data-sample="image-form" id="right-icon-tab2">
             <div class="addable-container">
@@ -89,7 +100,6 @@
             
       <div class="text-right">
         <%= button_tag "#{t(:save)}<i class=\"icon-check position-right\"></i>".html_safe, class: "btn btn-primary"%>
-        <%= link_to "#{t(:cancel)}<i class=\"icon-cross3 position-right\"></i>".html_safe, naturesoft_galleries.backend_galleries_path, class: "btn btn-danger"%>
       </div>
         
     <% end %>
