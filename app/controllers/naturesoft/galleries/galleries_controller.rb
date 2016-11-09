@@ -3,8 +3,8 @@ module Naturesoft
     class GalleriesController < Naturesoft::FrontendController
       before_action :get_gallery, only: [:detail]
       
-      def list
-        @galleries = Gallery.where(status: "active")
+      def listing
+        @galleries = Gallery.get_active
       end
       
       def detail
@@ -12,7 +12,7 @@ module Naturesoft
       
       private
         def get_gallery
-          @gallery = Naturesoft::Galleries::Gallery.find(params[:id])
+          @gallery = Naturesoft::Galleries::Gallery.find(params[:gallery_id])
         end
     end
   end

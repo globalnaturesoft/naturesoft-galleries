@@ -16,6 +16,14 @@ module Naturesoft::Galleries
 			end
 		end
     
+    def self.get_active
+			self.where(status: "active").order("custom_order ASC")
+		end
+    
+    def get_main_image
+			self.images.where(is_main: true).first
+		end
+    
     def self.filter_image_style
       [
         ["FILL","fill"],

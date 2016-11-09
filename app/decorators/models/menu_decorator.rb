@@ -4,7 +4,7 @@ if Naturesoft::Core.available?("menus")
       "galleries_list" => {
         "label" => "Galleries List",
         "controller" => "/naturesoft/galleries/galleries",
-        "action" => "list"
+        "action" => "listing"
       }
     }
   end
